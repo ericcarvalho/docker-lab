@@ -12,6 +12,7 @@ Este repositório contém os arquivos e configurações utilizados no laboratór
 
 ## 📁 Estrutura do Projeto
 📦 Projeto Docker Lab
+
 ├── docker-compose.yml         
 ├── nginx/                  
 │   └── default.conf           
