@@ -32,10 +32,12 @@ Este repositório contém os arquivos e configurações utilizados no laboratór
 • 	Entender como o Nginx pode atuar como proxy reverso
 • 	Integrar Redis para cache e MongoDB como banco de dados
 • 	Testar comunicação entre containers
+
 📚 Aprendizados
 • 	Criação de redes internas entre containers
 • 	Persistência de dados com volumes
 • 	Configuração de arquivos  para Nginx
 • 	Testes de conexão entre backend e Redis/MongoDB
+
 🧠 Autor
 Eric – entusiasta de tecnologia e explorador do mundo Docker.
