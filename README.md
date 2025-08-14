@@ -1,14 +1,41 @@
-# 🐳 Docker Lab - Fullstack com Nginx, Node.js, Redis e MongoDB
+# 🐳 Laboratório Docker: Nginx, Redis e MongoDB
 
-Este projeto é um laboratório Docker que integra:
+Este repositório contém os arquivos e configurações utilizados no laboratório prático de Docker realizado em **14 de agosto de 2025**. O objetivo foi criar um ambiente de desenvolvimento com múltiplos containers utilizando **Docker Compose**, integrando os serviços **Nginx**, **Redis** e **MongoDB**.
 
-- Frontend simples em HTML + JS
-- Backend em Node.js
-- Banco de dados MongoDB
-- Cache com Redis
-- Proxy reverso com Nginx
+## 📦 Tecnologias Utilizadas
 
-## 🚀 Como rodar
+- **Docker**: Containerização dos serviços
+- **Docker Compose**: Orquestração dos containers
+- **Nginx**: Servidor web reverso
+- **Redis**: Armazenamento em cache e gerenciamento de sessões
+- **MongoDB**: Banco de dados NoSQL
 
-```bash
-docker-compose up --build
+## 📁 Estrutura do Projeto
+📦 Projeto Docker Lab
+├── docker-compose.yml         # Arquivo principal de orquestração dos containers
+├── nginx/                     # Diretório com configurações do Nginx
+│   └── default.conf           # Configuração do proxy reverso
+├── app/                       # Diretório da aplicação backend
+│   └── index.js               # Arquivo principal da aplicação (ex: Node.js)
+└── README.md                  # Documentação do projeto
+
+## ⚙️ Como Executar
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/seu-usuario/seu-repositorio.git
+   cd seu-repositorio
+   docker-compose up -d
+   http://localhost
+
+ 🧪 Objetivos do Lab
+• Aprender a configurar múltiplos serviços com Docker Compose
+• 	Entender como o Nginx pode atuar como proxy reverso
+• 	Integrar Redis para cache e MongoDB como banco de dados
+• 	Testar comunicação entre containers
+📚 Aprendizados
+• 	Criação de redes internas entre containers
+• 	Persistência de dados com volumes
+• 	Configuração de arquivos  para Nginx
+• 	Testes de conexão entre backend e Redis/MongoDB
+🧠 Autor
+Eric – entusiasta de tecnologia e explorador do mundo Docker.
