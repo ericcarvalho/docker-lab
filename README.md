@@ -29,7 +29,6 @@ Este repositório contém os arquivos e configurações utilizados no laboratór
 
  🧪 Objetivos do Lab
 •  Aprender a configurar múltiplos serviços com Docker Compose
-
 • 	Entender como o Nginx pode atuar como proxy reverso
 • 	Integrar Redis para cache e MongoDB como banco de dados
 • 	Testar comunicação entre containers
