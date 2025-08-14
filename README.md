@@ -12,12 +12,11 @@ Este repositório contém os arquivos e configurações utilizados no laboratór
 
 ## 📁 Estrutura do Projeto
 📦 Projeto Docker Lab
-├── docker-compose.yml         # Arquivo principal de orquestração dos containers
-├── nginx/                     # Diretório com configurações do Nginx
-│   └── default.conf           # Configuração do proxy reverso
-├── app/                       # Diretório da aplicação backend
-│   └── index.js               # Arquivo principal da aplicação (ex: Node.js)
-└── README.md                  # Documentação do projeto
+├── docker-compose.yml         
+├── nginx/                  
+│   └── default.conf           
+├── app/                    
+│   └── index.js                      
 
 ## ⚙️ Como Executar
 1. Clone o repositório:
