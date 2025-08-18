@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const redis = require('redis');
+const Visit = require('./models/Visit');
 
 const app = express();
 const port = 3000;
@@ -9,18 +10,19 @@ const port = 3000;
 mongoose.connect('mongodb://mongo:27017/meubanco', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-});
+})
+.then(() => console.log('✅ Conectado ao MongoDB'))
+.catch(err => console.error('❌ Erro ao conectar ao MongoDB:', err));
 
 // Redis
 const redisClient = redis.createClient({ url: 'redis://redis:6379' });
-redisClient.connect();
+(async () => {
+  try {
+    await redisClient.connect();
+    console.log('✅ Conectado ao Redis');
+  } catch (err) {
+    console.error('❌ Erro ao conectar ao Redis:', err);
+  }
+})();
 
-app.get('/', async (req, res) => {
-  await redisClient.set('visitas', (parseInt(await redisClient.get('visitas')) || 0) + 1);
-  const visitas = await redisClient.get('visitas');
-  res.send(`Olá! Esta página foi visitada ${visitas} vezes.`);
-});
-
-app.listen(port, () => {
-  console.log(`Servidor rodando na porta ${port}`);
-});
+// Endpoints...

@@ -2,24 +2,123 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Lab Docker Frontend</title>
+  <title>Lab Docker Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    h1 {
+      color: #0072ff;
+      font-size: 2.5em;
+    }
+    .section {
+      margin-bottom: 40px;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    li {
+      padding: 6px 0;
+      border-bottom: 1px solid #eee;
+    }
+    canvas {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  </style>
 </head>
 <body>
-  <h1>Dados do Backend</h1>
-  <ul id="dados"></ul>
+  <header>
+    <h1>📊 Lab Docker Dashboard</h1>
+  </header>
+
+  <div class="section">
+    <h2>📦 Dados do Backend</h2>
+    <ul id="dados"></ul>
+  </div>
+
+  <div class="section">
+    <h2 id="contador">🔄 Carregando visitas...</h2>
+    <canvas id="graficoVisitas"></canvas>
+  </div>
+
+  <div class="section">
+    <h2>🕵️ Últimas Visitas</h2>
+    <ul id="lista-visitas"></ul>
+  </div>
 
   <script>
+    // Dados do backend
     fetch('/api/dados')
       .then(res => res.json())
       .then(data => {
         const ul = document.getElementById('dados');
         data.forEach(item => {
           const li = document.createElement('li');
-          li.textContent = JSON.stringify(item);
+          li.textContent = `${item.nome}: ${item.valor}`;
           ul.appendChild(li);
         });
-      })
-      .catch(err => console.error('Erro ao buscar dados:', err));
+      });
+
+    // Visitas
+    fetch('/api/visitas')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('contador').innerText = `👀 Total de visitas: ${data.total}`;
+        renderGrafico(data.total);
+      });
+
+    // Lista de visitas
+    fetch('/api/visitas/lista')
+      .then(res => res.json())
+      .then(data => {
+        const lista = document.getElementById('lista-visitas');
+        data.forEach(visita => {
+          const item = document.createElement('li');
+          item.innerText = `${new Date(visita.timestamp).toLocaleString()} - ${visita.ip}`;
+          lista.appendChild(item);
+        });
+      });
+
+    // Gráfico de visitas
+    function renderGrafico(total) {
+      const ctx = document.getElementById('graficoVisitas').getContext('2d');
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Visitas'],
+          datasets: [{
+            label: 'Total de Visitas',
+            data: [total],
+            backgroundColor: ['#0072ff'],
+            borderColor: ['#005bb5'],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }
+      });
+    }
   </script>
 </body>
 </html>
